@@ -52,6 +52,8 @@ public class CalculateDivisor {
             Thread.sleep(500);
         }
 
+        executor.shutdown();
+
         return futures.stream() //
                 .map(f -> toDivisorResult(f)) //
                 .sorted((o1, o2) -> {
@@ -90,7 +92,6 @@ public class CalculateDivisor {
 
         CalculateDivisor cp = new CalculateDivisor(von, bis, threads);
         System.out.println("Ergebnis: " + cp.calculate());
-        System.exit(0);
     }
 
 }
@@ -114,6 +115,7 @@ class DivisorTask implements Callable<DivisorResult> {
 
         return new DivisorResult(dividend, divisorCount);
     }
+
 }
 
 /**
